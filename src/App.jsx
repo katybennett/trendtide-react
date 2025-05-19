@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router";
 import Articles from "./components/Articles";
-import { getArticles } from "./api";
+import Header from "./components/Header";
+import SingleArticle from "./components/SingleArticle";
 
 function App() {
-  const [articles, setArticles] = useState([]);
-
-  useEffect(() => {
-    getArticles().then((res) => {
-      setArticles(res);
-    });
-  }, []);
 
   return (
     <>
-      <Articles articles={articles} />
+      <Header />
+      <Routes>
+        <Route path="/" element={<Articles />} />
+        <Route path="/articles/:articleId" element={<SingleArticle />} />
+      </Routes>
     </>
   );
 }

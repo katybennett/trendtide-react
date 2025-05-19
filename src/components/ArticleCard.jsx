@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Card, HStack, Image, } from "@chakra-ui/react";
+import { Badge, Box, Button, Card, HStack, Image } from "@chakra-ui/react";
 
 function ArticleCard({ article }) {
   return (
@@ -7,7 +7,7 @@ function ArticleCard({ article }) {
         objectFit="cover"
         maxW="200px"
         src={article.article_img_url}
-        alt="Caffe Latte"
+        alt="Article Image"
       />
       <Box>
         <Card.Body>
@@ -18,7 +18,9 @@ function ArticleCard({ article }) {
           </HStack>
         </Card.Body>
         <Card.Footer>
-          <Button>Read Article</Button>
+          <Button>
+            <a href={`/articles/${article.article_id}`}>Read Article</a>
+          </Button>
         </Card.Footer>
       </Box>
     </Card.Root>
