@@ -1,9 +1,6 @@
 import { Badge, Box, Button, Card, HStack, Image } from "@chakra-ui/react";
 
 function ArticleCard({ article }) {
-
-  
-
   return (
     <Card.Root flexDirection="row" overflow="hidden" maxW="xl">
       <Image
