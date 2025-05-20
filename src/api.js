@@ -15,3 +15,10 @@ export const getArticle = (articleId) => {
     return res.data.article;
   });
 };
+
+export const getCommentsPerArticle = (articleId) => {
+  return newsApi.get(`/articles/${articleId}/comments`).then((res) => {
+    console.log(res.data)
+    return res.data.comments
+  });
+};
