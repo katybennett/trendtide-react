@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { Badge, Button, Card, Center, Heading, HStack, Image, Spinner, Stack, Text, VStack, } from "@chakra-ui/react";
+import { Badge, Button, Card, Center, Heading, HStack, Image, Stack, Text, } from "@chakra-ui/react";
 
 import { useParams } from "react-router";
 import { getArticle } from "../api";
+import Loading from "./Loading";
 
 function SingleArticle() {
   const params = useParams();
   const { articleId } = params;
 
   const [articleData, setArticleData] = useState(null);
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -17,16 +19,19 @@ function SingleArticle() {
         setArticleData(res);
         setIsLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setError(err)
+      });
   }, []);
 
+  if (error) {
+    return <Error />;
+  }
+
   return isLoading ? (
-    <div>
-      <VStack colorPalette="teal">
-        <Spinner color="colorPalette.600" />
-        <Text color="colorPalette.600">Loading...</Text>
-      </VStack>
-    </div>
+      <div>
+        <Loading />
+      </div>
   ) : (
     <div>
       <Center>
