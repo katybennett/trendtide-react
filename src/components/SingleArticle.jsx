@@ -77,8 +77,8 @@ function SingleArticle() {
 
           {/* </Card.Description> */}
           <HStack mt="4">
-            <Badge>Total Comments: {articleData.comment_count}</Badge>
-            <Badge>Total Votes: {articleData.votes}</Badge>
+            <Badge>Total comments: {articleData.comment_count}</Badge>
+            <Badge>Total votes: {articleData.votes}</Badge>
           </HStack>
         </Card.Body>
 
