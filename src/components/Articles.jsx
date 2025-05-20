@@ -1,20 +1,35 @@
-import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Spinner, Text, VStack } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
+import Error from "./Error";
+import Loading from "./Loading";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getArticles().then((res) => {
-      setArticles(res);
-    }).catch((err) => {
-      console.log(err)
-    })
+    getArticles()
+      .then((res) => {
+        setArticles(res);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+      });
   }, []);
 
-  return (
+  if (error) {
+    return <Error />;
+  }
+
+    return isLoading ? (
+      <div>
+        <Loading />
+      </div>
+    ) : (
     <Flex
       data-test-id="articles-component"
       direction={{ base: "column", md: "row" }}
