@@ -1,6 +1,8 @@
 import { Heading, Highlight, Stack, Box, Text, Flex } from "@chakra-ui/react";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
+import UserAvatar from "./UserAvatar";
+import { Link } from "react-router";
 
 function Header() {
   const { isLoggedIn, loggedInUser } = useContext(UserContext);
@@ -19,15 +21,21 @@ function Header() {
               TrendTide News
             </Highlight>
           </Heading>
-          <Text>
-            Welcome {isLoggedIn ? loggedInUser.username : "guest"}
+
+          <Flex align="center" gap={3}>
             {isLoggedIn ? (
-              <img
-                src={loggedInUser.avatar_url}
-                alt={`Avatar of ${loggedInUser.username}`}
-              />
-            ) : null}
-          </Text>
+              <>
+                <Text>{loggedInUser.username}</Text>
+                <UserAvatar loggedInUser={loggedInUser} />
+              </>
+            ) : (
+              <Link to={"/users"}>
+                <Text fontSize="xl" fontWeight="bold">
+                  Log in
+                </Text>
+              </Link>
+            )}
+          </Flex>
         </Flex>
       </Box>
     </Stack>
