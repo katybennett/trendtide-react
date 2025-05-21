@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Badge,
   Box,
@@ -12,9 +12,15 @@ import {
 } from "@chakra-ui/react";
 
 import { useParams } from "react-router";
-import { getArticle, getCommentsPerArticle } from "../api";
+import {
+  getArticle,
+  getCommentsPerArticle,
+  incrementArticleWaves,
+} from "../api";
 import Loading from "./Loading";
 import CommentList from "./CommentList";
+import { UserContext } from "../contexts/UserContext";
+import { isArticleAuthor } from "../helpers";
 
 function SingleArticle() {
   const params = useParams();
@@ -24,6 +30,8 @@ function SingleArticle() {
   const [comments, setComments] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { loggedInUser } = useContext(UserContext);
 
   useEffect(() => {
     getArticle(articleId)
@@ -40,6 +48,19 @@ function SingleArticle() {
     getCommentsPerArticle(articleId)
       .then((res) => {
         setComments(res);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  };
+
+  const handleWaveClick = () => {
+    incrementArticleWaves(articleId)
+      .then((updatedArticle) => {
+        setArticleData((existingArticle) => ({
+          ...existingArticle,
+          ...updatedArticle,
+        }));
       })
       .catch((err) => {
         setError(err);
@@ -78,7 +99,7 @@ function SingleArticle() {
           {/* </Card.Description> */}
           <HStack mt="4">
             <Badge>Total comments: {articleData.comment_count}</Badge>
-            <Badge>Total votes: {articleData.votes}</Badge>
+            <Badge>Total waves: {articleData.votes}</Badge>
           </HStack>
         </Card.Body>
 
@@ -87,7 +108,11 @@ function SingleArticle() {
             View comments
           </Button>
           <Button variant="ghost">Comment</Button>
-          <Button variant="ghost">Vote</Button>
+          {!isArticleAuthor(loggedInUser, articleData) && (
+            <Button variant="ghost" onClick={handleWaveClick}>
+              Wave
+            </Button>
+          )}
         </Card.Footer>
       </Card.Root>
 

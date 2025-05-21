@@ -1,4 +1,5 @@
 import { Badge, Box, Button, Card, HStack, Image } from "@chakra-ui/react";
+import { Link } from "react-router";
 
 function ArticleCard({ article }) {
   return (
@@ -12,14 +13,16 @@ function ArticleCard({ article }) {
       <Box>
         <Card.Body>
           <Card.Title fontSize={{ md: "24px" }}>{article.title}</Card.Title>
-          <Card.Description>Article description will be here</Card.Description>
+          <Card.Description>
+            Article description will be here
+            </Card.Description>
           <HStack mt="4">
             <Badge>{article.topic}</Badge>
           </HStack>
         </Card.Body>
         <Card.Footer>
           <Button>
-            <a href={`/articles/${article.article_id}`}>Read Article</a>
+            <Link to={`/articles/${article.article_id}`}>Read Article</Link>
           </Button>
         </Card.Footer>
       </Box>

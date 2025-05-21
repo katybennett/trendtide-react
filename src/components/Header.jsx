@@ -1,28 +1,44 @@
-import { Heading, Highlight, Stack, Text, Box } from "@chakra-ui/react";
+import { Heading, Highlight, Stack, Box, Text, Flex } from "@chakra-ui/react";
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
+import UserAvatar from "./UserAvatar";
+import { Link } from "react-router";
 
 function Header() {
+  const { isLoggedIn, loggedInUser } = useContext(UserContext);
+
   return (
     <Stack>
-      {/* <Box bg="grey" width="100%" padding="4" color="white">
-        <>Sign in</>
-        <> | Search Bar</>
-      </Box> */}
       <Box
         p="4"
         borderWidth="1px"
         borderColor="border.disabled"
         color="fg.disabled"
       >
-        <Heading size="3xl" letterSpacing="tight">
-          <Highlight query="News" styles={{ color: "teal.600" }}>
-            TrendTide News
-          </Highlight>
-        </Heading>
+        <Flex justify="space-between" align="center">
+          <Heading size="3xl" letterSpacing="tight">
+            <Link to={"/"}>
+              <Highlight query="News" styles={{ color: "teal.600" }}>
+                TrendTide News
+              </Highlight>
+            </Link>
+          </Heading>
 
-        {/* <Text fontSize="md" color="fg.muted">
-        Chakra UI is a simple, modular and accessible component library that
-        gives you the building blocks you need.Trends
-      </Text> */}
+          <Flex align="center" gap={3}>
+            {isLoggedIn ? (
+              <>
+                <Text>{loggedInUser.username}</Text>
+                <UserAvatar loggedInUser={loggedInUser} />
+              </>
+            ) : (
+              <Link to={"/users"}>
+                <Text fontSize="xl" fontWeight="bold">
+                  Log in
+                </Text>
+              </Link>
+            )}
+          </Flex>
+        </Flex>
       </Box>
     </Stack>
   );
