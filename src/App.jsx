@@ -7,8 +7,11 @@ import { Box, Container, Flex } from "@chakra-ui/react";
 
 import LeftColumn from "./components/LeftColumn";
 import RightColumn from "./components/RightColumn";
+import Users from "./components/Users";
 
 function App() {
+
+  
   return (
     <>
       <Header />
@@ -28,7 +31,7 @@ function App() {
             <Box data-test-id="main-box" flex="4" bg="white" p={4}>
               <Routes>
                 <Route 
-                  path="/" 
+                  path="/articles" 
                   element={<Articles />} 
                   />
                 <Route
@@ -38,6 +41,10 @@ function App() {
                 <Route
                   path="/articles/:articleId/comments"
                   element={<Comments />}
+                />
+                <Route
+                  path="/users"
+                  element={<Users />}
                 />
               </Routes>
             </Box>

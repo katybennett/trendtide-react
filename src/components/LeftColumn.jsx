@@ -1,13 +1,20 @@
-import { Text } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
+import { Link } from "react-router";
 
 function LeftColumn() {
   return (
-    <>
-      <Text fontSize="xl" fontWeight="bold">
-        Home
-      </Text>
-      <Text mt={4}>Content here coming soon!</Text>
-    </>
+    <Stack direction={{ base: "row", md: "column" }}>
+      <Link to={"/articles"}>
+        <Text fontSize="xl" fontWeight="bold">
+          Home
+        </Text>
+      </Link>
+      <Link to={"/users"}>
+        <Text fontSize="xl" fontWeight="bold">
+          Users
+        </Text>
+      </Link>
+    </Stack>
   );
 }
 

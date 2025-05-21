@@ -22,3 +22,15 @@ export const getCommentsPerArticle = (articleId) => {
     return res.data.comments
   });
 };
+
+export const getUsers = () => {
+  return newsApi.get("/users").then((res) => {
+    return res.data.users;
+  });
+};
+
+// export const getUser = (username) => {
+//   return newsApi.get(`/users/${username}`).then((res) => {
+//     return res.data.users;
+//   });
+// };
