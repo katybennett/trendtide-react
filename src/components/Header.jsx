@@ -17,9 +17,11 @@ function Header() {
       >
         <Flex justify="space-between" align="center">
           <Heading size="3xl" letterSpacing="tight">
-            <Highlight query="News" styles={{ color: "teal.600" }}>
-              TrendTide News
-            </Highlight>
+            <Link to={"/"}>
+              <Highlight query="News" styles={{ color: "teal.600" }}>
+                TrendTide News
+              </Highlight>
+            </Link>
           </Heading>
 
           <Flex align="center" gap={3}>

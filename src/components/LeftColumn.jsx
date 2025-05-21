@@ -6,7 +6,7 @@ function LeftColumn() {
     <Stack direction={{ base: "row", md: "column" }}>
       <Link to={"/articles"}>
         <Text fontSize="xl" fontWeight="bold">
-          Home
+          Articles
         </Text>
       </Link>
       <Link to={"/users"}>

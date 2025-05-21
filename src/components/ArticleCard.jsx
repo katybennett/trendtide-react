@@ -1,4 +1,5 @@
 import { Badge, Box, Button, Card, HStack, Image } from "@chakra-ui/react";
+import { Link } from "react-router";
 
 function ArticleCard({ article }) {
   return (
@@ -19,7 +20,7 @@ function ArticleCard({ article }) {
         </Card.Body>
         <Card.Footer>
           <Button>
-            <a href={`/articles/${article.article_id}`}>Read Article</a>
+            <Link to={`/articles/${article.article_id}`}>Read Article</Link>
           </Button>
         </Card.Footer>
       </Box>
