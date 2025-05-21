@@ -12,7 +12,11 @@ import {
 } from "@chakra-ui/react";
 
 import { useParams } from "react-router";
-import { getArticle, getCommentsPerArticle } from "../api";
+import {
+  getArticle,
+  getCommentsPerArticle,
+  incrementArticleWaves,
+} from "../api";
 import Loading from "./Loading";
 import CommentList from "./CommentList";
 
@@ -40,6 +44,19 @@ function SingleArticle() {
     getCommentsPerArticle(articleId)
       .then((res) => {
         setComments(res);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  };
+
+  const handleWaveClick = () => {
+    incrementArticleWaves(articleId)
+      .then((updatedArticle) => {
+        setArticleData((art) => ({
+          ...art,
+          ...updatedArticle,
+        }));
       })
       .catch((err) => {
         setError(err);
@@ -78,7 +95,7 @@ function SingleArticle() {
           {/* </Card.Description> */}
           <HStack mt="4">
             <Badge>Total comments: {articleData.comment_count}</Badge>
-            <Badge>Total votes: {articleData.votes}</Badge>
+            <Badge>Total waves: {articleData.votes}</Badge>
           </HStack>
         </Card.Body>
 
@@ -87,7 +104,9 @@ function SingleArticle() {
             View comments
           </Button>
           <Button variant="ghost">Comment</Button>
-          <Button variant="ghost">Vote</Button>
+          <Button variant="ghost" onClick={handleWaveClick}>
+            Wave
+          </Button>
         </Card.Footer>
       </Card.Root>
 

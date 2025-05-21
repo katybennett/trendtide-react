@@ -18,8 +18,7 @@ export const getArticle = (articleId) => {
 
 export const getCommentsPerArticle = (articleId) => {
   return newsApi.get(`/articles/${articleId}/comments`).then((res) => {
-    console.log(res.data)
-    return res.data.comments
+    return res.data.comments;
   });
 };
 
@@ -27,6 +26,14 @@ export const getUsers = () => {
   return newsApi.get("/users").then((res) => {
     return res.data.users;
   });
+};
+
+export const incrementArticleWaves = (articleId) => {
+  return newsApi
+    .patch(`/articles/${articleId}`, { inc_votes: 1 })
+    .then((res) => {
+      return res.data.updatedArticle;
+    });
 };
 
 // export const getUser = (username) => {
