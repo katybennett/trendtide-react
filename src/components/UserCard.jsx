@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 function UserCard({ user }) {
-  const [loginPrompt, setLoginPromp] = useState("");
 
   const { setLoggedInUser } = useContext(UserContext);
 
@@ -24,7 +23,7 @@ function UserCard({ user }) {
         />
         <Card.Title mb="2">{user.name}</Card.Title>
         {/* <Card.Description>
-            USer description
+            User description
           </Card.Description> */}
       </Card.Body>
       <Card.Footer justifyContent="flex-end">

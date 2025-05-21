@@ -6,7 +6,7 @@ function RightColumn() {
       <Text fontSize="xl" fontWeight="bold">
         Top 10 Articles
       </Text>
-      {/* <Text mt={4}>Content here comming soon too!</Text> */}
+      {/* <Text mt={4}>text</Text> */}
     </>
   );
 }
