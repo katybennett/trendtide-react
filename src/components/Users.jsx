@@ -13,13 +13,11 @@ function Users() {
   useEffect(() => {
     getUsers()
       .then((res) => {
-        console.log("USERS", res);
         setUsers(res);
         setIsLoading(false);
       })
       .catch((err) => {
         setError(err);
-        console.log("ERR", err);
       });
   }, []);
 
@@ -36,7 +34,10 @@ function Users() {
       <Text fontSize="xl" fontWeight="bold">
         {/* Users */}
       </Text>
-      <Grid templateColumns={{ base: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
+      <Grid
+        templateColumns={{ base: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }}
+        gap={6}
+      >
         {users.map((user, i) => (
           <Box key={i}>
             <UserCard user={user} />

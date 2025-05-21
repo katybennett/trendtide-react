@@ -1,6 +1,10 @@
 import { Heading, Highlight, Stack, Box, Text, Flex } from "@chakra-ui/react";
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
 
 function Header() {
+  const { isLoggedIn, loggedInUser } = useContext(UserContext);
+
   return (
     <Stack>
       <Box
@@ -15,7 +19,15 @@ function Header() {
               TrendTide News
             </Highlight>
           </Heading>
-          <Text>Welcome Guest</Text>
+          <Text>
+            Welcome {isLoggedIn ? loggedInUser.username : "guest"}
+            {isLoggedIn ? (
+              <img
+                src={loggedInUser.avatar_url}
+                alt={`Avatar of ${loggedInUser.username}`}
+              />
+            ) : null}
+          </Text>
         </Flex>
       </Box>
     </Stack>
