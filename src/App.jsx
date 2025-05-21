@@ -27,7 +27,10 @@ function App() {
             {/* Main Content - Centre */}
             <Box data-test-id="main-box" flex="4" bg="white" p={4}>
               <Routes>
-                <Route path="/" element={<Articles />} />
+                <Route 
+                  path="/" 
+                  element={<Articles />} 
+                  />
                 <Route
                   path="/articles/:articleId"
                   element={<SingleArticle />}
