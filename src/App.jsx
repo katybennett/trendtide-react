@@ -10,6 +10,7 @@ import RightColumn from "./components/RightColumn";
 import Users from "./components/Users";
 import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
+import HomePage from "./components/HomePage";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -34,9 +35,7 @@ function App() {
               {/* Main Content - Centre */}
               <Box data-test-id="main-box" flex="4" bg="white" p={4}>
                 <Routes>
-                  {/* <Route 
-                  path="/" 
-                  element={</>} /> */}
+                  <Route path="/" element={<HomePage />} />
                   <Route path="/articles" element={<Articles />} />
                   <Route
                     path="/articles/:articleId"
