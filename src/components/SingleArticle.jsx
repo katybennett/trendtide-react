@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import {
+  Alert,
   Badge,
   Button,
   Card,
@@ -50,6 +51,11 @@ function SingleArticle() {
   };
 
   const handleWaveClick = () => {
+    if (!loggedInUser.username) {
+      alert("Please log in to wave");
+      return;
+    }
+
     const value = hasWaved ? -1 : 1;
 
     updateArticleWaves(articleId, value)
@@ -106,12 +112,15 @@ function SingleArticle() {
           <Button onClick={handleViewCommentsClick} variant="solid">
             View comments
           </Button>
+
           <Button variant="ghost">Comment</Button>
+
           {!isArticleAuthor(loggedInUser, articleData) && (
             <Button
               variant="ghost"
               onClick={handleWaveClick}
               color={!hasWaved ? "gray.800" : "teal.600"}
+              fontWeight={!hasWaved ? "normal" : "bold"}
             >
               {!hasWaved ? "Wave" : "Waved"}
             </Button>
