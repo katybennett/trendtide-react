@@ -43,3 +43,11 @@ export const postCommentArticle = (articleId, username, body) => {
       return res.data.comment;
     });
 };
+
+export const deleteCommentByCommentId = (commentId) => {
+  return newsApi
+  .delete(`/comments/${commentId}`)
+  .catch((err) => {
+    console.log(err)
+  })
+}
