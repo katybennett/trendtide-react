@@ -36,6 +36,7 @@ function SingleArticle() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasWaved, setHasWaved] = useState(false);
   const [newComment, setNewComment] = useState("");
+  const [postSuccessMessage, setPostSuccessMessage] = useState("");
 
   useEffect(() => {
     getArticle(articleId)
@@ -64,7 +65,7 @@ function SingleArticle() {
       return;
     }
 
-    if(newComment.trim().length === 0) {
+    if (newComment.trim().length === 0) {
       alert("Comment cannot be empty");
       return;
     }
@@ -73,6 +74,8 @@ function SingleArticle() {
       .then((comment) => {
         setComments((previousComments) => [comment, ...previousComments]);
         setNewComment("");
+        setPostSuccessMessage("Comment posted successfully!");
+        setTimeout(() => setPostSuccessMessage(""), 3000);
       })
       .catch((err) => {
         setError(err);
@@ -154,6 +157,11 @@ function SingleArticle() {
 
       {comments.length > 0 && (
         <>
+          {postSuccessMessage && (
+            <Text color="teal.600" mb={2}>
+              {postSuccessMessage}
+            </Text>
+          )}
           <Textarea
             placeholder="Write a comment..."
             value={newComment}
