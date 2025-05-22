@@ -9,6 +9,9 @@ function LeftColumn() {
           Articles
         </Text>
       </Link>
+      <Text fontSize="xl" fontWeight="bold">
+        Topics
+      </Text>
       <Link to={"/users"}>
         <Text fontSize="xl" fontWeight="bold">
           Users
