@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import {
+  Alert,
   Badge,
-  Box,
   Button,
   Card,
   Heading,
@@ -12,11 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useParams } from "react-router";
-import {
-  getArticle,
-  getCommentsPerArticle,
-  incrementArticleWaves,
-} from "../api";
+import { getArticle, getCommentsPerArticle, updateArticleWaves } from "../api";
 import Loading from "./Loading";
 import CommentList from "./CommentList";
 import { UserContext } from "../contexts/UserContext";
@@ -30,13 +26,13 @@ function SingleArticle() {
   const [comments, setComments] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
   const { loggedInUser } = useContext(UserContext);
+  const [hasWaved, setHasWaved] = useState(false);
 
   useEffect(() => {
     getArticle(articleId)
-      .then((res) => {
-        setArticleData(res);
+      .then((article) => {
+        setArticleData(article);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -55,12 +51,21 @@ function SingleArticle() {
   };
 
   const handleWaveClick = () => {
-    incrementArticleWaves(articleId)
+    if (!loggedInUser.username) {
+      alert("Please log in to wave");
+      return;
+    }
+
+    const value = hasWaved ? -1 : 1;
+
+    updateArticleWaves(articleId, value)
       .then((updatedArticle) => {
         setArticleData((existingArticle) => ({
           ...existingArticle,
           ...updatedArticle,
         }));
+
+        setHasWaved((hasWaved) => !hasWaved);
       })
       .catch((err) => {
         setError(err);
@@ -107,10 +112,17 @@ function SingleArticle() {
           <Button onClick={handleViewCommentsClick} variant="solid">
             View comments
           </Button>
+
           <Button variant="ghost">Comment</Button>
+
           {!isArticleAuthor(loggedInUser, articleData) && (
-            <Button variant="ghost" onClick={handleWaveClick}>
-              Wave
+            <Button
+              variant="ghost"
+              onClick={handleWaveClick}
+              color={!hasWaved ? "gray.800" : "teal.600"}
+              fontWeight={!hasWaved ? "normal" : "bold"}
+            >
+              {!hasWaved ? "Wave" : "Waved"}
             </Button>
           )}
         </Card.Footer>

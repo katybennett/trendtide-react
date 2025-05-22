@@ -28,9 +28,9 @@ export const getUsers = () => {
   });
 };
 
-export const incrementArticleWaves = (articleId) => {
+export const updateArticleWaves = (articleId, value) => {
   return newsApi
-    .patch(`/articles/${articleId}`, { inc_votes: 1 })
+    .patch(`/articles/${articleId}`, { inc_votes: value })
     .then((res) => {
       return res.data.updatedArticle;
     });
