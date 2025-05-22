@@ -11,11 +11,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useParams } from "react-router";
-import {
-  getArticle,
-  getCommentsPerArticle,
-  updateArticleWaves,
-} from "../api";
+import { getArticle, getCommentsPerArticle, updateArticleWaves } from "../api";
 import Loading from "./Loading";
 import CommentList from "./CommentList";
 import { UserContext } from "../contexts/UserContext";
@@ -30,7 +26,7 @@ function SingleArticle() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { loggedInUser } = useContext(UserContext);
-  const [hasWaved, setHasWaved] = useState(false)
+  const [hasWaved, setHasWaved] = useState(false);
 
   useEffect(() => {
     getArticle(articleId)
@@ -63,8 +59,7 @@ function SingleArticle() {
           ...updatedArticle,
         }));
 
-        setHasWaved(hasWaved => !hasWaved)
-
+        setHasWaved((hasWaved) => !hasWaved);
       })
       .catch((err) => {
         setError(err);
@@ -113,10 +108,11 @@ function SingleArticle() {
           </Button>
           <Button variant="ghost">Comment</Button>
           {!isArticleAuthor(loggedInUser, articleData) && (
-            <Button 
+            <Button
               variant="ghost"
               onClick={handleWaveClick}
-              color={!hasWaved ? "gray.800" : "teal.600"} >
+              color={!hasWaved ? "gray.800" : "teal.600"}
+            >
               {!hasWaved ? "Wave" : "Waved"}
             </Button>
           )}
