@@ -11,13 +11,14 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-import { useParams } from "react-router";
 import {
   getArticle,
   getCommentsPerArticle,
   postCommentArticle,
   updateArticleWaves,
 } from "../api";
+
+import { useParams } from "react-router";
 import Loading from "./Loading";
 import CommentList from "./CommentList";
 import { UserContext } from "../contexts/UserContext";
@@ -34,7 +35,7 @@ function SingleArticle() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasWaved, setHasWaved] = useState(false);
-  const [newComment, setNewComment] = useState([]);
+  const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
     getArticle(articleId)
@@ -49,8 +50,8 @@ function SingleArticle() {
 
   const handleViewCommentsClick = () => {
     getCommentsPerArticle(articleId)
-      .then((res) => {
-        setComments(res);
+      .then((comments) => {
+        setComments(comments);
       })
       .catch((err) => {
         setError(err);
@@ -60,6 +61,11 @@ function SingleArticle() {
   const handlePostCommentClick = () => {
     if (!loggedInUser.username) {
       alert("Please log in to comment");
+      return;
+    }
+
+    if(newComment.trim().length === 0) {
+      alert("Comment cannot be empty");
       return;
     }
 
