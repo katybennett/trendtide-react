@@ -4,6 +4,7 @@ import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 import Error from "./Error";
 import Loading from "./Loading";
+import ArticleList from "./ArticleList";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
@@ -34,13 +35,7 @@ function Articles() {
       <Text fontSize="xl" fontWeight="bold">
         {/* Articles */}
       </Text>
-      <Grid gap={6}>
-        {articles.map((article, i) => (
-          <GridItem key={i}>
-            <ArticleCard article={article} />
-          </GridItem>
-        ))}
-      </Grid>
+      <ArticleList articles={articles} />
     </>
   );
 }
