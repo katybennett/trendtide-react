@@ -11,6 +11,7 @@ import Users from "./components/Users";
 import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
 import HomePage from "./components/HomePage";
+import Topics from "./components/Topics";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -41,6 +42,7 @@ function App() {
                     path="/articles/:articleId"
                     element={<SingleArticle />}
                   />
+                  <Route path="/topics/:slug" element={<Topics />} />
                   <Route
                     path="/articles/:articleId/comments"
                     element={<Comments />}
