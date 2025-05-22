@@ -36,8 +36,10 @@ export const updateArticleWaves = (articleId, value) => {
     });
 };
 
-// export const getUser = (username) => {
-//   return newsApi.get(`/users/${username}`).then((res) => {
-//     return res.data.users;
-//   });
-// };
+export const postCommentArticle = (articleId, username, body) => {
+  return newsApi
+    .post(`/articles/${articleId}/comments`, { username: username, body: body })
+    .then((res) => {
+      return res.data.comment;
+    });
+};
