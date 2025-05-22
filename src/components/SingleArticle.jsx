@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import {
-  Alert,
   Badge,
   Button,
   Card,
@@ -9,10 +8,16 @@ import {
   Image,
   Stack,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 
 import { useParams } from "react-router";
-import { getArticle, getCommentsPerArticle, updateArticleWaves } from "../api";
+import {
+  getArticle,
+  getCommentsPerArticle,
+  postCommentArticle,
+  updateArticleWaves,
+} from "../api";
 import Loading from "./Loading";
 import CommentList from "./CommentList";
 import { UserContext } from "../contexts/UserContext";
@@ -22,12 +27,14 @@ function SingleArticle() {
   const params = useParams();
   const { articleId } = params;
 
+  const { loggedInUser } = useContext(UserContext);
+
   const [articleData, setArticleData] = useState(null);
-  const [comments, setComments] = useState(false);
+  const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { loggedInUser } = useContext(UserContext);
   const [hasWaved, setHasWaved] = useState(false);
+  const [newComment, setNewComment] = useState([]);
 
   useEffect(() => {
     getArticle(articleId)
@@ -44,6 +51,22 @@ function SingleArticle() {
     getCommentsPerArticle(articleId)
       .then((res) => {
         setComments(res);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  };
+
+  const handlePostCommentClick = () => {
+    if (!loggedInUser.username) {
+      alert("Please log in to comment");
+      return;
+    }
+
+    postCommentArticle(articleId, loggedInUser.username, newComment)
+      .then((comment) => {
+        setComments((previousComments) => [comment, ...previousComments]);
+        setNewComment("");
       })
       .catch((err) => {
         setError(err);
@@ -97,11 +120,8 @@ function SingleArticle() {
           </Text>
           {/* <Text>Created at: {articleData.created_at}</Text> */}
 
-          {/* <Card.Description> */}
+          <Card.Description textStyle="lg">{articleData.body}</Card.Description>
 
-          <Text textStyle="lg">{articleData.body}</Text>
-
-          {/* </Card.Description> */}
           <HStack mt="4">
             <Badge>Total comments: {articleData.comment_count}</Badge>
             <Badge>Total waves: {articleData.votes}</Badge>
@@ -110,10 +130,8 @@ function SingleArticle() {
 
         <Card.Footer gap="2">
           <Button onClick={handleViewCommentsClick} variant="solid">
-            View comments
+            Comments
           </Button>
-
-          <Button variant="ghost">Comment</Button>
 
           {!isArticleAuthor(loggedInUser, articleData) && (
             <Button
@@ -128,7 +146,20 @@ function SingleArticle() {
         </Card.Footer>
       </Card.Root>
 
-      <>{comments.length > 0 && <CommentList comments={comments} />}</>
+      {comments.length > 0 && (
+        <>
+          <Textarea
+            placeholder="Write a comment..."
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          />
+          <Button onClick={handlePostCommentClick} variant="ghost" mb={4}>
+            Comment
+          </Button>
+
+          <CommentList comments={comments} />
+        </>
+      )}
     </>
   );
 }
