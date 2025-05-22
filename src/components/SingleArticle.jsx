@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 import {
+  deleteCommentByCommentId,
   getArticle,
   getCommentsPerArticle,
   postCommentArticle,
@@ -22,7 +23,7 @@ import { useParams } from "react-router";
 import Loading from "./Loading";
 import CommentList from "./CommentList";
 import { UserContext } from "../contexts/UserContext";
-import { isArticleAuthor } from "../helpers";
+import { isArticleAuthor, isCommentAuthor } from "../helpers";
 
 function SingleArticle() {
   const params = useParams();
@@ -37,6 +38,7 @@ function SingleArticle() {
   const [hasWaved, setHasWaved] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [postSuccessMessage, setPostSuccessMessage] = useState("");
+  const [deleteComment, setDeleteComment] = useState(false);
 
   useEffect(() => {
     getArticle(articleId)
@@ -79,6 +81,23 @@ function SingleArticle() {
       })
       .catch((err) => {
         setError(err);
+      });
+  };
+
+  const handleDeleteComment = (commentId) => {
+    setDeleteComment(true);
+
+    deleteCommentByCommentId(commentId)
+      .then(() => {
+        setComments((previousComments) =>
+          previousComments.filter((comment) => comment.comment_id !== commentId)
+        );
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setDeleteComment(false);
       });
   };
 
@@ -171,7 +190,12 @@ function SingleArticle() {
             Comment
           </Button>
 
-          <CommentList comments={comments} />
+          <CommentList
+            comments={comments}
+            loggedInUser={loggedInUser}
+            onDeleteComment={handleDeleteComment}
+            deleteComment={deleteComment}
+          />
         </>
       )}
     </>
