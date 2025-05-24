@@ -33,7 +33,7 @@ function ArticleCard({ article }) {
             <Link to={`/articles/${article.article_id}`}>Read Article</Link>
           </Button>
           <Text fontSize="sm">
-            <span>votes: {article.votes} | </span>
+            <span>Waves: {article.votes} | </span>
             <span>Comments:{article.comment_count} | </span>
             <span>created at:{article.created_at_date}</span>
           </Text>

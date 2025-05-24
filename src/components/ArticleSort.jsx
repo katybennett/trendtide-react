@@ -2,7 +2,7 @@ import { Portal, Select, createListCollection } from "@chakra-ui/react";
 
 const sortOptions = createListCollection({
   items: [
-    { label: "Votes", value: "votes" },
+    { label: "Waves", value: "votes" },
     { label: "Comments count", value: "comment_count" },
     { label: "Created at", value: "created_at" },
   ],
