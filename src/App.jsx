@@ -42,7 +42,7 @@ function App() {
                     path="/articles/:articleId"
                     element={<ArticleViewPage />}
                   />
-                  <Route path="/topics/:slug" element={<TopicsPage />} />
+                  <Route path="/topics/:slug" element={<ArticlesPage />} />
                   <Route
                     path="/articles/:articleId/comments"
                     element={<Comments />}

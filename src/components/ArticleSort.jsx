@@ -21,6 +21,7 @@ function ArticleSort({ onChange, sortBy }) {
       alignItems="center"
       justifyContent="right"
       mb={4}
+      as="span"
     >
       <Select.HiddenSelect />
       <Select.Label>Sort by</Select.Label>

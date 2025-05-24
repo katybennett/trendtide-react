@@ -11,7 +11,7 @@ import { Link } from "react-router";
 
 function ArticleCard({ article }) {
   return (
-    <Card.Root flexDirection="row" overflow="hidden" maxW="xl">
+    <Card.Root flexDirection="row" overflow="hidden">
       <Image
         objectFit="cover"
         maxW="200px"
