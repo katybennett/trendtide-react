@@ -4,8 +4,8 @@ const newsApi = axios.create({
   baseURL: "https://trendtidenews.onrender.com/api",
 });
 
-export const getArticles = () => {
-  return newsApi.get("/articles").then((res) => {
+export const getArticles = ({ sortBy } = {}) => {
+  return newsApi.get("/articles", { params: { sortBy } }).then((res) => {
     return res.data.articles;
   });
 };

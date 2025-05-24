@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import Articles from "./components/Articles";
+import ArticlesPage from "./components/ArticlesPage";
 import Header from "./components/Header";
 import SingleArticle from "./components/SingleArticle";
 import Comments from "./components/Comments";
@@ -37,7 +37,7 @@ function App() {
               <Box data-test-id="main-box" flex="4" bg="white" p={4}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
-                  <Route path="/articles" element={<Articles />} />
+                  <Route path="/articles" element={<ArticlesPage />} />
                   <Route
                     path="/articles/:articleId"
                     element={<SingleArticle />}
