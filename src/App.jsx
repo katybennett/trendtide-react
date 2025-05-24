@@ -11,7 +11,6 @@ import SurfersPage from "./components/pages/SurfersPage";
 import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
 import HomePage from "./components/pages/HomePage";
-import TopicsPage from "./components/pages/TopicsPage";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
