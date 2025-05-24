@@ -17,13 +17,13 @@ import {
   getCommentsPerArticle,
   postCommentArticle,
   updateArticleWaves,
-} from "../api";
+} from "../../api";
 
 import { useParams } from "react-router";
-import Loading from "./Loading";
-import CommentList from "./CommentList";
-import { UserContext } from "../contexts/UserContext";
-import { isArticleAuthor, isCommentAuthor } from "../helpers";
+import Loading from "../Loading";
+import CommentList from "../CommentList";
+import { UserContext } from "../../contexts/UserContext";
+import { isArticleAuthor, isCommentAuthor } from "../../helpers";
 
 function SingleArticle() {
   const params = useParams();

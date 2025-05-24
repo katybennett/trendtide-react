@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router";
-import ArticlesPage from "./components/ArticlesPage";
+import ArticlesPage from "./components/pages/ArticlesPage";
 import Header from "./components/Header";
-import SingleArticle from "./components/SingleArticle";
+import ArticleViewPage from "./components/pages/ArticleViewPage";
 import Comments from "./components/Comments";
 import { Box, Container, Flex } from "@chakra-ui/react";
 
 import LeftColumn from "./components/LeftColumn";
 import RightColumn from "./components/RightColumn";
-import Users from "./components/Users";
+import SurfersPage from "./components/pages/SurfersPage";
 import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
-import HomePage from "./components/HomePage";
-import Topics from "./components/Topics";
+import HomePage from "./components/pages/HomePage";
+import TopicsPage from "./components/pages/TopicsPage";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -40,14 +40,14 @@ function App() {
                   <Route path="/articles" element={<ArticlesPage />} />
                   <Route
                     path="/articles/:articleId"
-                    element={<SingleArticle />}
+                    element={<ArticleViewPage />}
                   />
-                  <Route path="/topics/:slug" element={<Topics />} />
+                  <Route path="/topics/:slug" element={<TopicsPage />} />
                   <Route
                     path="/articles/:articleId/comments"
                     element={<Comments />}
                   />
-                  <Route path="/users" element={<Users />} />
+                  <Route path="/users" element={<SurfersPage />} />
                 </Routes>
               </Box>
               {/* Right Column */}

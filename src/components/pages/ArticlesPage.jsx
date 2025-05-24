@@ -1,10 +1,10 @@
 import { Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { getArticles } from "../api";
-import Error from "./Error";
-import Loading from "./Loading";
-import ArticleList from "./ArticleList";
-import ArticleSort from "./ArticleSort";
+import { getArticles } from "../../api";
+import Error from "../Error";
+import Loading from "../Loading";
+import ArticleList from "../ArticleList";
+import ArticleSort from "../ArticleSort";
 
 function ArticlesPage() {
   const [articles, setArticles] = useState([]);

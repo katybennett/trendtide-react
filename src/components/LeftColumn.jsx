@@ -11,7 +11,7 @@ function LeftColumn() {
       </Link>
       <Link to={"/users"}>
         <Text fontSize="xl" fontWeight="bold">
-          Users
+          Surfers
         </Text>
       </Link>
     </Stack>
