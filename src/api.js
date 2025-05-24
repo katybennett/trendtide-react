@@ -1,4 +1,5 @@
 import axios from "axios";
+import { formatArticle } from "./helpers";
 
 const newsApi = axios.create({
   baseURL: "https://trendtidenews.onrender.com/api",
@@ -6,7 +7,7 @@ const newsApi = axios.create({
 
 export const getArticles = ({ sortBy } = {}) => {
   return newsApi.get("/articles", { params: { sortBy } }).then((res) => {
-    return res.data.articles;
+    return res.data.articles.map(formatArticle);
   });
 };
 
@@ -20,13 +21,13 @@ export const getArticlesByTopic = (topicSlug) => {
   return newsApi
     .get("/articles", { params: { topic: topicSlug } })
     .then((res) => {
-      return res.data.articles;
+      return res.data.articles.map(formatArticle);
     });
 };
 
 export const getArticle = (articleId) => {
   return newsApi.get(`/articles/${articleId}`).then((res) => {
-    return res.data.article;
+    return formatArticle(res.data.article);
   });
 };
 

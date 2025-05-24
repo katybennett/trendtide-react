@@ -124,7 +124,7 @@ function SingleArticle() {
   };
 
   if (error) {
-    return <Error />;
+    return <Error error={error} />;
   }
 
   return isLoading ? (
@@ -146,7 +146,7 @@ function SingleArticle() {
           <Text textStyle="md" fontWeight="medium">
             by {articleData.author}
           </Text>
-          {/* <Text>Created at: {articleData.created_at}</Text> */}
+          <Text>Created at: {articleData.created_at_date}</Text>
 
           <Card.Description textStyle="lg">{articleData.body}</Card.Description>
 

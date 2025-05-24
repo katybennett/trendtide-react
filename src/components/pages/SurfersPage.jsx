@@ -22,7 +22,7 @@ function Users() {
   }, []);
 
   if (error) {
-    return <Error />;
+    return <Error error={error} />;
   }
 
   return isLoading ? (

@@ -1,4 +1,12 @@
-import { Badge, Box, Button, Card, HStack, Image } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  Card,
+  HStack,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import { Link } from "react-router";
 
 function ArticleCard({ article }) {
@@ -20,10 +28,15 @@ function ArticleCard({ article }) {
             </Badge>
           </HStack>
         </Card.Body>
-        <Card.Footer>
-          <Button>
+        <Card.Footer flexDirection="column" alignItems="flex-start">
+          <Button mb={2}>
             <Link to={`/articles/${article.article_id}`}>Read Article</Link>
           </Button>
+          <Text fontSize="sm">
+            <span>votes: {article.votes} | </span>
+            <span>Comments:{article.comment_count} | </span>
+            <span>created at:{article.created_at_date}</span>
+          </Text>
         </Card.Footer>
       </Box>
     </Card.Root>

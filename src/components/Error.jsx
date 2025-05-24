@@ -1,6 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 
-function Error () {
+function Error({ error }) {
+  console.error(error);
   return (
     <Flex
       data-test-id="articles-component"
@@ -10,6 +11,6 @@ function Error () {
       Oops! Something went wrong
     </Flex>
   );
-};
+}
 
 export default Error;
