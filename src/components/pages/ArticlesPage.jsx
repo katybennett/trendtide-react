@@ -6,17 +6,23 @@ import Loading from "../Loading";
 import ArticleList from "../ArticleList";
 import ArticleSort from "../ArticleSort";
 import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 function ArticlesPage() {
   const { slug } = useParams();
+  const [urlSearchParams, setSearchParams] = useSearchParams({
+    sortBy: "created_at",
+    orderBy: "desc",
+  });
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortBy, setSortBy] = useState("created_at");
-  const [orderBy, setOrderBy] = useState("desc");
+
+  const searchParams = Object.fromEntries(urlSearchParams);
+  const { sortBy, orderBy } = searchParams;
 
   useEffect(() => {
-    getArticles({ sortBy, topic: slug, order: orderBy })
+    getArticles({ sortBy, orderBy, topic: slug })
       .then((res) => {
         setArticles(res);
       })
@@ -30,12 +36,19 @@ function ArticlesPage() {
 
   const handleSortChange = (val) => {
     setIsLoading(true);
-    setSortBy(val.value[0]);
+
+    setSearchParams({
+      ...searchParams,
+      sortBy: val.value[0],
+    });
   };
 
   const handleOrderChange = () => {
     setIsLoading(true);
-    setOrderBy((prevVal) => (prevVal === "asc" ? "desc" : "asc"));
+    setSearchParams((prevVal) => ({
+      ...searchParams,
+      orderBy: prevVal.get("orderBy") === "asc" ? "desc" : "asc",
+    }));
   };
 
   if (error) {
@@ -55,7 +68,7 @@ function ArticlesPage() {
           </Text>
         )}
         <ArticleSort
-          sortBy={sortBy}
+          sortBy={searchParams.sortBy}
           orderBy={orderBy}
           onSortChange={handleSortChange}
           onOrderChange={handleOrderChange}
