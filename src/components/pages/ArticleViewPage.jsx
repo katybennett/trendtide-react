@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   Badge,
   Button,
@@ -23,7 +23,7 @@ import { useParams } from "react-router";
 import Loading from "../Loading";
 import CommentList from "../CommentList";
 import { UserContext } from "../../contexts/UserContext";
-import { isArticleAuthor, isCommentAuthor } from "../../helpers";
+import { isArticleAuthor } from "../../helpers";
 
 function SingleArticle() {
   const params = useParams();
@@ -40,6 +40,8 @@ function SingleArticle() {
   const [postSuccessMessage, setPostSuccessMessage] = useState("");
   const [deleteComment, setDeleteComment] = useState(false);
 
+  const commentListRef = useRef(null);
+
   useEffect(() => {
     getArticle(articleId)
       .then((article) => {
@@ -50,6 +52,12 @@ function SingleArticle() {
         setError(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (commentListRef.current) {
+      commentListRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [comments]);
 
   const handleViewCommentsClick = () => {
     getCommentsPerArticle(articleId)
@@ -146,13 +154,11 @@ function SingleArticle() {
           <Text textStyle="md" fontWeight="medium">
             by {articleData.author}
           </Text>
-          <Text>
-            {articleData.created_at_date}
-          </Text>
+          <Text>{articleData.created_at_date}</Text>
 
           <Card.Description textStyle="lg">{articleData.body}</Card.Description>
 
-          <HStack mt="4">
+          <HStack mt="4" ref={commentListRef}>
             <Badge>Total comments: {articleData.comment_count}</Badge>
             <Badge>Total waves: {articleData.votes}</Badge>
           </HStack>
@@ -191,7 +197,6 @@ function SingleArticle() {
           <Button onClick={handlePostCommentClick} variant="ghost" mb={4}>
             Comment
           </Button>
-
           <CommentList
             comments={comments}
             loggedInUser={loggedInUser}
