@@ -11,6 +11,7 @@ import SurfersPage from "./components/pages/SurfersPage";
 import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
 import HomePage from "./components/pages/HomePage";
+import NotFoundPage from "./components/pages/NotFoundPage";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -47,6 +48,7 @@ function App() {
                     element={<Comments />}
                   />
                   <Route path="/users" element={<SurfersPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </Box>
               {/* Right Column */}

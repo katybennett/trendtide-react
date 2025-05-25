@@ -1,15 +1,11 @@
-import { Flex } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 
 function Error({ error }) {
   console.error(error);
   return (
-    <Flex
-      data-test-id="articles-component"
-      direction={{ base: "column", md: "row" }}
-      minHeight="100vh"
-    >
+    <Text>
       Oops! Something went wrong
-    </Flex>
+    </Text>
   );
 }
 
