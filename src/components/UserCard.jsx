@@ -1,9 +1,8 @@
-import { Button, Card, Image, Stack } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { Button, Card, Image } from "@chakra-ui/react";
+import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 function UserCard({ user }) {
-
   const { setLoggedInUser } = useContext(UserContext);
 
   function handleLogin() {

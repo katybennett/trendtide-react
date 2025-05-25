@@ -6,7 +6,6 @@ import {
   Flex,
   HStack,
   Image,
-  Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router";
 

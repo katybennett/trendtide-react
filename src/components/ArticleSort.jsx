@@ -4,7 +4,7 @@ import OrderByButton from "./OrderByButtton";
 const sortOptions = createListCollection({
   items: [
     { label: "Waves", value: "votes" },
-    { label: "Comments count", value: "comment_count" },
+    { label: "Comment count", value: "comment_count" },
     { label: "Created at", value: "created_at" },
   ],
 });

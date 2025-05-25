@@ -1,4 +1,4 @@
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { getArticles } from "../../api";
 import Error from "../Error";
@@ -68,7 +68,7 @@ function ArticlesPage() {
           </Text>
         )}
         <ArticleSort
-          sortBy={searchParams.sortBy}
+          sortBy={sortBy}
           orderBy={orderBy}
           onSortChange={handleSortChange}
           onOrderChange={handleOrderChange}

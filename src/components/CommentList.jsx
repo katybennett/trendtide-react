@@ -1,8 +1,12 @@
 import { Button, Card, Heading, Stack } from "@chakra-ui/react";
 import { isCommentAuthor } from "../helpers";
 
-function CommentList({ comments, loggedInUser, onDeleteComment, deleteComment }) {
-  
+function CommentList({
+  comments,
+  loggedInUser,
+  onDeleteComment,
+  deleteComment,
+}) {
   return comments.map((comment, i) => (
     <Card.Root key={i} w="full" overflow="hidden" mb={4}>
       <Card.Body gap="2">
