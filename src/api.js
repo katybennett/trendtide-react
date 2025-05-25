@@ -5,25 +5,13 @@ const newsApi = axios.create({
   baseURL: "https://trendtidenews.onrender.com/api",
 });
 
-export const getArticles = ({ sortBy, topic } = {}) => {
-  return newsApi.get("/articles", { params: { sortBy, topic } }).then((res) => {
-    return res.data.articles.map(formatArticle);
-  });
+export const getArticles = ({ sortBy, topic, order }) => {
+  return newsApi
+    .get("/articles", { params: { sortBy, topic, order } })
+    .then((res) => {
+      return res.data.articles.map(formatArticle);
+    });
 };
-
-// export const getTopics = () => {
-//   return newsApi.get("/topics").then((res) => {
-//     return res.data.topics;
-//   });
-// };
-
-// export const getArticlesByTopic = (topicSlug) => {
-//   return newsApi
-//     .get("/articles", { params: { topic: topicSlug } })
-//     .then((res) => {
-//       return res.data.articles.map(formatArticle);
-//     });
-// };
 
 export const getArticle = (articleId) => {
   return newsApi.get(`/articles/${articleId}`).then((res) => {

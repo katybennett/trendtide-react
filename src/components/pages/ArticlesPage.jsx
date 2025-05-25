@@ -13,9 +13,10 @@ function ArticlesPage() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState("created_at");
+  const [orderBy, setOrderBy] = useState("desc");
 
   useEffect(() => {
-    getArticles({ sortBy, topic: slug })
+    getArticles({ sortBy, topic: slug, order: orderBy })
       .then((res) => {
         setArticles(res);
       })
@@ -25,11 +26,16 @@ function ArticlesPage() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [sortBy, slug]);
+  }, [sortBy, orderBy, slug]);
 
   const handleSortChange = (val) => {
     setIsLoading(true);
     setSortBy(val.value[0]);
+  };
+
+  const handleOrderChange = () => {
+    setIsLoading(true);
+    setOrderBy((prevVal) => (prevVal === "asc" ? "desc" : "asc"));
   };
 
   if (error) {
@@ -50,7 +56,9 @@ function ArticlesPage() {
         )}
         <ArticleSort
           sortBy={sortBy}
-          onChange={handleSortChange}
+          orderBy={orderBy}
+          onSortChange={handleSortChange}
+          onOrderChange={handleOrderChange}
         />
       </Flex>
       <ArticleList articles={articles} />

@@ -1,4 +1,5 @@
 import { Portal, Select, createListCollection } from "@chakra-ui/react";
+import OrderByButton from "./OrderByButtton";
 
 const sortOptions = createListCollection({
   items: [
@@ -8,7 +9,7 @@ const sortOptions = createListCollection({
   ],
 });
 
-function ArticleSort({ onChange, sortBy }) {
+function ArticleSort({ onSortChange, onOrderChange, sortBy, orderBy }) {
   return (
     <Select.Root
       data-test-id="select-root"
@@ -16,7 +17,7 @@ function ArticleSort({ onChange, sortBy }) {
       defaultValue={[sortBy]}
       value={[sortBy]}
       size="sm"
-      onValueChange={onChange}
+      onValueChange={onSortChange}
       flexDirection="row"
       alignItems="center"
       justifyContent="right"
@@ -45,6 +46,8 @@ function ArticleSort({ onChange, sortBy }) {
           </Select.Content>
         </Select.Positioner>
       </Portal>
+
+      <OrderByButton onOrderChange={onOrderChange} orderBy={orderBy} />
     </Select.Root>
   );
 }
