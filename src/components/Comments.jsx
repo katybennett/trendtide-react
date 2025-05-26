@@ -1,9 +1,9 @@
 import { useParams } from "react-router";
 import { getCommentsPerArticle } from "../api";
 import { useEffect, useState } from "react";
-import Error from "./Error";
 import Loading from "./Loading";
 import CommentList from "./CommentList";
+import ErrorPage from "./pages/ErrorPage";
 
 function Comments() {
   const params = useParams();
@@ -25,7 +25,7 @@ function Comments() {
   }, []);
 
   if (error) {
-    return <Error error={error} />;
+    return <ErrorPage error={error} />;
   }
 
   return isLoading ? (

@@ -1,9 +1,9 @@
 import { getUsers } from "../../api";
 import { useEffect, useState } from "react";
 import UserCard from "../UserCard";
-import Error from "../Error";
 import Loading from "../Loading";
 import { Box, Grid, Text } from "@chakra-ui/react";
+import ErrorPage from "./ErrorPage";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -22,7 +22,7 @@ function Users() {
   }, []);
 
   if (error) {
-    return <Error error={error} />;
+    return <ErrorPage error={error} />;
   }
 
   return isLoading ? (

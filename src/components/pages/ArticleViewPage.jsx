@@ -24,6 +24,7 @@ import Loading from "../Loading";
 import CommentList from "../CommentList";
 import { UserContext } from "../../contexts/UserContext";
 import { isArticleAuthor } from "../../helpers";
+import ErrorPage from "./ErrorPage";
 
 function SingleArticle() {
   const params = useParams();
@@ -132,7 +133,7 @@ function SingleArticle() {
   };
 
   if (error) {
-    return <Error error={error} />;
+    return <ErrorPage error={error} />;
   }
 
   return isLoading ? (
@@ -181,7 +182,6 @@ function SingleArticle() {
           )}
         </Card.Footer>
       </Card.Root>
-
       {comments.length > 0 && (
         <>
           {postSuccessMessage && (

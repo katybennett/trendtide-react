@@ -68,7 +68,6 @@ function ArticleCard({ article }) {
             </span>
             <span>{article.created_at_date}</span>
           </Flex>
-          {/* </Text> */}
         </Card.Footer>
       </Box>
     </Card.Root>
