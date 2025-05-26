@@ -47,7 +47,7 @@ function ArticleCard({ article }) {
             <span>
               <Image
                 rounded="md"
-                src="../wave1.png"
+                src="../wave.png"
                 width="6"
                 alt="Wave icon"
                 display="inline"
