@@ -3,12 +3,16 @@ This is a React project I created as part of my learning journey into frontend d
 
 Throughout this project, I focused on connecting the frontend to the backend, fetching and displaying data using useEffect, useState, and conditional rendering. I also handled GET, PATCH, and POST requests, worked with dynamic routing via useParams and useSearchParams, used Context to provide user state availability throughout all components, and built reusable components while managing state with React hooks
 
+🔗 Demo: https://trendtide-news.netlify.app/
+
+
 ## 🛠️ Technologies Used
 - React
 - Vite
 - React Router
 - Axios
 - Chakra UI
+- Netlify
 
 ## ⚙️ Features
 + Log in as a user to access full app features
