@@ -22,7 +22,7 @@ function ArticlesPage() {
   const { sortBy, orderBy } = searchParams;
 
   useEffect(() => {
-    getArticles({ sortBy, orderBy, topic: slug })
+    getArticles({ sortBy, order: orderBy, topic: slug })
       .then((res) => {
         setArticles(res);
       })
