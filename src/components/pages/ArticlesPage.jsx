@@ -8,12 +8,15 @@ import { useParams } from "react-router-dom";
 import { useSearchParams } from "react-router";
 import ErrorPage from "./ErrorPage";
 
+const defaulSearchParams = {
+  sortBy: "created_at",
+  orderBy: "desc",
+};
+
 function ArticlesPage() {
   const { slug } = useParams();
-  const [urlSearchParams, setSearchParams] = useSearchParams({
-    sortBy: "created_at",
-    orderBy: "desc",
-  });
+  const [urlSearchParams, setSearchParams] =
+    useSearchParams(defaulSearchParams);
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,6 +36,12 @@ function ArticlesPage() {
         setIsLoading(false);
       });
   }, [sortBy, orderBy, slug]);
+
+  useEffect(() => {
+    if (!sortBy || !orderBy) {
+      setSearchParams(defaulSearchParams);
+    }
+  }, [sortBy, orderBy, setSearchParams]);
 
   const handleSortChange = (val) => {
     setIsLoading(true);
