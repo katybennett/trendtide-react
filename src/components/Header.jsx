@@ -1,4 +1,12 @@
-import { Heading, Highlight, Stack, Box, Text, Flex } from "@chakra-ui/react";
+import {
+  Heading,
+  Highlight,
+  Stack,
+  Box,
+  Text,
+  Flex,
+  Container,
+} from "@chakra-ui/react";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
 import UserAvatar from "./UserAvatar";
@@ -8,13 +16,13 @@ function Header() {
   const { isLoggedIn, loggedInUser } = useContext(UserContext);
 
   return (
-    <Stack>
-      <Box
-        p="4"
-        borderWidth="1px"
-        borderColor="border.disabled"
-        color="fg.disabled"
-      >
+    <Box
+      py="4"
+      borderBottomWidth="1px"
+      borderColor="border.disabled"
+      color="fg.disabled"
+    >
+      <Container maxW="1200px">
         <Flex justify="space-between" align="center">
           <Heading size="3xl" letterSpacing="tight">
             <Link to={"/"}>
@@ -39,8 +47,8 @@ function Header() {
             )}
           </Flex>
         </Flex>
-      </Box>
-    </Stack>
+      </Container>
+    </Box>
   );
 }
 

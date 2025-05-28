@@ -21,14 +21,10 @@ function App() {
     <UserContext.Provider value={{ loggedInUser, setLoggedInUser, isLoggedIn }}>
       <>
         <Header />
-        <Box as="main" bg="gray.50" minHeight="100vh" pt={2}>
+        <Box as="main" bg="gray.50" minHeight="100vh">
           {/* Centre All Container */}
-          <Container maxW="1200px" px={2}>
-            <Flex
-              direction={{ base: "column", md: "row" }}
-              minHeight="100vh"
-              gap={4}
-            >
+          <Container maxW="1200px" px={{ base: 0, xl: 6 }}>
+            <Flex direction={{ base: "column", md: "row" }} minHeight="100vh">
               {/* Left Column */}
               <Box flex="1" bg="gray.100" p={6}>
                 <LeftColumn />
@@ -52,7 +48,7 @@ function App() {
                 </Routes>
               </Box>
               {/* Right Column */}
-              <Box flex="1" bg="gray.100" p={6}>
+              <Box flex="1" bg="gray.100" p={4}>
                 <RightColumn />
               </Box>
             </Flex>
