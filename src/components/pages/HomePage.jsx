@@ -1,9 +1,38 @@
 import { Box, Heading, Text, Stack, Container } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import ArticleList from "../ArticleList";
+import { getArticles } from "../../api";
+import Loading from "../Loading";
+import ErrorPage from "./ErrorPage";
 
 function HomePage() {
-  return (
+  const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getArticles({ sortBy: "created_at", order: "desc", limit: 3 })
+      .then((res) => {
+        console.log("RES", res);
+        setArticles(res);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  if (error) {
+    return <ErrorPage error={error} />;
+  }
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Box bg="gray.50" pt={10}>
-      <Container maxW="3xl">
+      <Container maxW="3xl" pb={10}>
         <Stack spacing={6} textAlign="center">
           <Heading as="h1" size="2xl" color="gray.800">
             Welcome!
@@ -22,6 +51,10 @@ function HomePage() {
           </Text>
         </Stack>
       </Container>
+      <Heading as="h2" size="xl" color="gray.800" p={2}>
+        Top 3 Most Recent Articles
+      </Heading>
+      <ArticleList articles={articles} />
     </Box>
   );
 }

@@ -23,7 +23,7 @@ function ArticleCard({ article }) {
           <Card.Title fontSize={{ md: "24px" }}>{article.title}</Card.Title>
           <Card.Description>Click below to read more...</Card.Description>
           <HStack mt="4">
-            <Badge>
+            <Badge fontSize="sm">
               <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
             </Badge>
           </HStack>
