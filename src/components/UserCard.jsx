@@ -1,13 +1,25 @@
 import { Button, Card, Image } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 function UserCard({ user }) {
-  const { setLoggedInUser } = useContext(UserContext);
+  const [hasWaved, setHasWaved] = useState(false);
+  const { loggedInUser, isLoggedIn, setLoggedInUser } = useContext(UserContext);
 
-  function handleLogin() {
-    setLoggedInUser(user);
-  }
+  const logInDisabled = isLoggedIn && user.username !== loggedInUser.username;
+  const logInText =
+    isLoggedIn && loggedInUser.username === user.username
+      ? "Log out"
+      : "Log in";
+
+  const handleWaveClick = () => {
+    if (!loggedInUser.username) {
+      alert("Please log in to wave");
+      return;
+    } else {
+      setHasWaved((hasWaved) => !hasWaved);
+    }
+  };
 
   return (
     <Card.Root size="sm">
@@ -26,8 +38,20 @@ function UserCard({ user }) {
           </Card.Description> */}
       </Card.Body>
       <Card.Footer justifyContent="flex-end">
-        <Button variant="outline">Wave</Button>
-        <Button onClick={handleLogin}>Log in</Button>
+        <Button
+          variant="ghost"
+          onClick={handleWaveClick}
+          color={!hasWaved ? "gray.800" : "teal.600"}
+          fontWeight={!hasWaved ? "normal" : "bold"}
+        >
+          {!hasWaved ? "Wave" : "Waved"}
+        </Button>
+        <Button
+          onClick={() => setLoggedInUser(!isLoggedIn ? user : {})}
+          disabled={logInDisabled}
+        >
+          {logInText}
+        </Button>
       </Card.Footer>
     </Card.Root>
   );

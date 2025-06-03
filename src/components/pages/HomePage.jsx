@@ -1,9 +1,19 @@
-import { Box, Heading, Text, Stack, Container } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Stack,
+  Container,
+  Flex,
+  LinkBox,
+  Button,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ArticleList from "../ArticleList";
 import { getArticles } from "../../api";
 import Loading from "../Loading";
 import ErrorPage from "./ErrorPage";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [articles, setArticles] = useState([]);
@@ -13,7 +23,6 @@ function HomePage() {
   useEffect(() => {
     getArticles({ sortBy: "created_at", order: "desc", limit: 3 })
       .then((res) => {
-        console.log("RES", res);
         setArticles(res);
       })
       .catch((err) => {
@@ -52,9 +61,14 @@ function HomePage() {
         </Stack>
       </Container>
       <Heading as="h2" size="xl" color="gray.800" p={2}>
-        Top 3 Most Recent Articles
+        Most Recent Articles:
       </Heading>
       <ArticleList articles={articles} />
+      <Flex alignItems="center" justifyContent="center">
+        <Button mt={8} p={6} variant="ghost" >
+          <Link to={`/articles`}>View all articles</Link>
+        </Button>
+      </Flex>
     </Box>
   );
 }

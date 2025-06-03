@@ -1,11 +1,11 @@
 import {
   Heading,
   Highlight,
-  Stack,
   Box,
   Text,
   Flex,
   Container,
+  Image,
 } from "@chakra-ui/react";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
@@ -42,6 +42,13 @@ function Header() {
               <Link to={"/users"}>
                 <Text fontSize="xl" fontWeight="bold">
                   Log in
+                  <Image
+                    rounded="sm"
+                    src="../default-avatar.png"
+                    width="9"
+                    display="inline"
+                    ml="2"
+                  />
                 </Text>
               </Link>
             )}
