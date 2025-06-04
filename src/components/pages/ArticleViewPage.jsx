@@ -155,13 +155,13 @@ function SingleArticle() {
           <Text textStyle="md" fontWeight="medium">
             by {articleData.author}
           </Text>
-          <Text>{articleData.created_at_date}</Text>
+          <Text fontSize="sm" >{articleData.created_at_date}</Text>
 
           <Card.Description textStyle="lg">{articleData.body}</Card.Description>
 
           <HStack mt="4" ref={commentListRef}>
-            <Badge>Total comments: {articleData.comment_count}</Badge>
-            <Badge>Total waves: {articleData.votes}</Badge>
+            <Badge fontSize="sm">Total comments: {articleData.comment_count}</Badge>
+            <Badge fontSize="sm">Total waves: {articleData.votes}</Badge>
           </HStack>
         </Card.Body>
 

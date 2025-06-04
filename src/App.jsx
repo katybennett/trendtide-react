@@ -23,7 +23,7 @@ function App() {
         <Header />
         <Box as="main" bg="gray.50" minHeight="100vh">
           {/* Centre All Container */}
-          <Container maxW="1200px" px={{ base: 0, xl: 6 }}>
+          <Container maxW="1200px" px={{ base: 4, xl: 6 }}>
             <Flex direction={{ base: "column", md: "row" }} minHeight="100vh">
               {/* Left Column */}
               <Box flex="1" bg="gray.100" p={6}>
