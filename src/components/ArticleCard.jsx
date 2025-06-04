@@ -11,15 +11,15 @@ import { Link } from "react-router";
 
 function ArticleCard({ article }) {
   return (
-    <Card.Root flexDirection="row" overflow="hidden">
+    <Card.Root flexDirection={{ base: "column", sm: "row" }} overflow="hidden">
       <Image
         objectFit="cover"
-        maxW="200px"
+        maxW={{ base: "100%", sm: "200px" }}
         src={article.article_img_url}
         alt="Article Image"
       />
       <Box width="100%">
-        <Card.Body>
+        <Card.Body p={{ base: 4, sm: 6 }}>
           <Card.Title fontSize={{ md: "24px" }}>{article.title}</Card.Title>
           <Card.Description>Click below to read more...</Card.Description>
           <HStack mt="4">
@@ -30,21 +30,20 @@ function ArticleCard({ article }) {
         </Card.Body>
         <Card.Footer
           data-test-id="card-footer"
-          flexDirection={{ base: "column", sm: "row", md: "column", xl: "row" }}
+          flexDirection={{ base: "column", xl: "row" }}
           justifyContent="space-between"
+          p={{ base: 4, sm: 6 }}
+          pt={0}
           alignItems={{
             base: "flex-start",
-            sm: "center",
-            md: "flex-start",
             xl: "center",
           }}
         >
           <Button mb={2}>
             <Link to={`/articles/${article.article_id}`}>Read Article</Link>
           </Button>
-          {/* <Text fontSize="sm"> */}
           <Flex gap={5}>
-            <span>
+            <HStack>
               <Image
                 rounded="md"
                 src="../wave.png"
@@ -54,8 +53,8 @@ function ArticleCard({ article }) {
                 mr="1"
               />
               {article.votes}
-            </span>
-            <span>
+            </HStack>
+            <HStack>
               <Image
                 rounded="md"
                 src="../comments.png"
@@ -65,7 +64,7 @@ function ArticleCard({ article }) {
                 mr="1"
               />
               {article.comment_count}
-            </span>
+            </HStack>
             <span>{article.created_at_date}</span>
           </Flex>
         </Card.Footer>

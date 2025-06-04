@@ -40,8 +40,8 @@ function HomePage() {
   return isLoading ? (
     <Loading />
   ) : (
-    <Box bg="gray.50" pt={10}>
-      <Container maxW="3xl" pb={10}>
+    <Box>
+      <Box bg="gray.100" data-test-id="home-container" p={8}>
         <Stack spacing={6} textAlign="center">
           <Heading as="h1" size="2xl" color="gray.800">
             Welcome!
@@ -59,13 +59,13 @@ function HomePage() {
             Stay curious. Stay sharp. And surf the top of the wave!
           </Text>
         </Stack>
-      </Container>
-      <Heading as="h2" size="xl" color="gray.800" p={2}>
+      </Box>
+      <Heading as="h2" size="xl" color="gray.800" my={6}>
         Most Recent Articles:
       </Heading>
       <ArticleList articles={articles} />
       <Flex alignItems="center" justifyContent="center">
-        <Button mt={8} p={6} variant="ghost" >
+        <Button mt={8} p={6} variant="ghost">
           <Link to={`/articles`}>View all articles</Link>
         </Button>
       </Flex>
